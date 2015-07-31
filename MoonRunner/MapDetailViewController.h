@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Run.h"
 
 @interface MapDetailViewController : UIViewController
-
+@property (strong, nonatomic) Run *run;
 @end

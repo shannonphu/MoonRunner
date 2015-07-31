@@ -192,6 +192,13 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="cra-N8-TIN"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="sz8-Nl-gwm" id="57L-HK-jRb"/>
+                        <outlet property="distanceLabel" destination="Yvu-mw-hDf" id="ddH-af-stP"/>
+                        <outlet property="mapView" destination="BTs-XY-LAl" id="73i-GV-A1Y"/>
+                        <outlet property="paceLabel" destination="nsR-sh-bA9" id="6cw-HL-0tx"/>
+                        <outlet property="timeLabel" destination="RYx-6a-NL9" id="flU-Qu-nwm"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1078" y="60"/>

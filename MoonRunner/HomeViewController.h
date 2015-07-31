@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewRunViewController.h"
 
 @interface HomeViewController : UIViewController
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
