@@ -8,6 +8,9 @@
 
 #import "MapDetailViewController.h"
 #import <MapKit/MapKit.h>
+#import "MathController.h"
+#import "Run.h"
+#import "Location.h"
 
 @interface MapDetailViewController ()
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
@@ -32,16 +35,20 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setRun:(Run *)run
-{
+- (void)setRun:(Run *)run {
     if (_run != run) {
         _run = run;
         [self configureView];
     }
 }
 
-- (void)configureView
-{
+- (void)configureView {
+    self.distanceLabel.text = [MathController stringForDistance:self.run.distance.floatValue];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    self.dateLabel.text = [formatter stringFromDate:self.run.timestamp];
+    self.timeLabel.text = [NSString stringWithFormat:@"Time: %@", [MathController stringForSeconds:self.run.duration.intValue usingLongFormat:YES]];
+    self.paceLabel.text = [NSString stringWithFormat:@"Pace: %@", [MathController stringForAvgPaceFromDist:self.run.distance.floatValue overTime:self.run.duration.intValue]];
 }
 
 /*
