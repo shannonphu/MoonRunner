@@ -42,7 +42,6 @@ float const goldMultiplier = 1.10; // 10% speed increase
     for (NSDictionary *badgeDict in badgeDicts) {
         [badgeObj addObject:[self badgeFromDict:badgeDict]];
     }
-    NSLog(@"%@", badgeObj);
     return badgeObj;
 }
 
