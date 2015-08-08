@@ -11,6 +11,7 @@
 #import "MathController.h"
 #import "Run.h"
 #import "Location.h"
+#import "MultiColorPolyline.h"
 
 @interface MapDetailViewController () <MKMapViewDelegate>
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
@@ -91,11 +92,11 @@
 // MKPolyLine and make line black and width 3
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
-    if ([overlay isKindOfClass:[MKPolyline class]]) {
-        MKPolyline *polyLine = (MKPolyline *)overlay;
+    if ([overlay isKindOfClass:[MultiColorPolyline class]]) {
+        MultiColorPolyline *polyLine = (MultiColorPolyline *)overlay;
         MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:polyLine];
-        renderer.strokeColor = [UIColor blackColor];
-        renderer.lineWidth = 3;
+        renderer.strokeColor = polyLine.color;
+        renderer.lineWidth = 5;
         return renderer;
     }
     return nil;
@@ -114,7 +115,8 @@
     if (self.run.locations.count > 0) {
         self.mapView.hidden = NO;
         [self.mapView setRegion:[self mapRegion]];
-        [self.mapView addOverlay:[self polyline]];
+        NSArray *colorSegmentArr = [MathController colorSegmentsForLocations:self.run.locations.array];
+        [self.mapView addOverlays:colorSegmentArr];
     } else {
         self.mapView.hidden = YES;
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, this run has no locations saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

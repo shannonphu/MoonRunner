@@ -7,6 +7,8 @@
 //
 
 #import "MathController.h"
+#import "MultiColorPolyline.h"
+#import "Location.h"
 
 static bool const isMetric = YES;
 static float const metersInKM = 1000;
@@ -75,6 +77,88 @@ static float const metersInMile = 1609.344;
     int paceSec = (int)(avgPaceSecMeters * unitMultiplier - (paceMin * 60));
     
     return [NSString stringWithFormat:@"%i:%02i %@", paceMin, paceSec, unitName];
+}
+
+// return array of speed between every 2 consecutive location points
++ (NSArray *)colorSegmentsForLocations:(NSArray *)locations {
+    NSMutableArray *speeds = [NSMutableArray array];
+    double slowestSpeed = DBL_MAX;
+    double fastestSpeed = 0.0;
+    
+    for (int i = 1; i < locations.count; i++) {
+        Location *firstLocation = [locations objectAtIndex:(i - 1)];
+        Location *secondLocation = [locations objectAtIndex:i];
+        
+        // convert Location objects to CLLocation
+        CLLocation *firstCLLocation = [[CLLocation alloc] initWithLatitude:firstLocation.latitude.doubleValue longitude:firstLocation.longitude.doubleValue];
+        CLLocation *secondCLLocation = [[CLLocation alloc] initWithLatitude:secondLocation.latitude.doubleValue longitude:secondLocation.longitude.doubleValue];
+        
+        // calculate speed using position change over time change
+        double distance = [secondCLLocation distanceFromLocation:firstCLLocation];
+        double time = [secondLocation.timestamp timeIntervalSinceDate:firstLocation.timestamp];
+        double speed = distance / time;
+        
+        slowestSpeed = speed < slowestSpeed ? speed : slowestSpeed;
+        fastestSpeed = speed > fastestSpeed ? speed : fastestSpeed;
+        
+        [speeds addObject:@(speed)];
+    }
+    
+    double meanSpeed = (slowestSpeed + fastestSpeed)/2;
+    
+    // RGB for red (slowest)
+    CGFloat r_red = 1.0f;
+    CGFloat r_green = 20/255.0f;
+    CGFloat r_blue = 44/255.0f;
+    
+    // RGB for yellow (middle)
+    CGFloat y_red = 1.0f;
+    CGFloat y_green = 215/255.0f;
+    CGFloat y_blue = 0.0f;
+    
+    // RGB for green (fastest)
+    CGFloat g_red = 0.0f;
+    CGFloat g_green = 146/255.0f;
+    CGFloat g_blue = 78/255.0f;
+    
+    NSMutableArray *colorSegments = [NSMutableArray array];
+    for (int i = 1; i < locations.count; i++) {
+        Location *firstLocation = [locations objectAtIndex:(i - 1)];
+        Location *secondLocation = [locations objectAtIndex:i];
+        
+        CLLocationCoordinate2D coord[2];
+        coord[0].latitude = firstLocation.latitude.floatValue;
+        coord[0].longitude = firstLocation.longitude.floatValue;
+        coord[1].latitude = secondLocation.latitude.floatValue;
+        coord[1].longitude = secondLocation.longitude.floatValue;
+        
+        double speed = [[speeds objectAtIndex:(i - 1)] doubleValue];
+        UIColor *color = [UIColor blackColor];
+        
+        CGFloat red;
+        CGFloat green;
+        CGFloat blue;
+        
+        if (speed < meanSpeed) {
+            double ratio = (speed - slowestSpeed) / (meanSpeed - slowestSpeed);
+            red = r_red + ratio * (y_red - r_red);
+            green = r_green + ratio * (y_green - r_green);
+            blue = r_blue + ratio * (y_blue - r_blue);
+        } else {
+            double ratio = (speed - meanSpeed) / (fastestSpeed - meanSpeed);
+            red = y_red + ratio * (g_red - y_red);
+            green = y_green + ratio * (g_green - y_green);
+            blue = y_blue + ratio * (g_blue - y_blue);
+        }
+        color = [UIColor colorWithRed:red green:green blue:blue alpha:1.0f];
+        
+        MultiColorPolyline *segment = [MultiColorPolyline polylineWithCoordinates:coord count:2];
+        segment.color = color;
+        
+        [colorSegments addObject:segment];
+    }
+    
+    return colorSegments;
 }
 
 @end

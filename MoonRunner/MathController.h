@@ -12,4 +12,5 @@
 + (NSString *)stringForDistance:(float)meters;
 + (NSString *)stringForSeconds:(int)seconds usingLongFormat:(BOOL)longFormat;
 + (NSString *)stringForAvgPaceFromDist:(float)meters overTime:(int)seconds;
++ (NSArray *)colorSegmentsForLocations:(NSArray *)locations;
 @end

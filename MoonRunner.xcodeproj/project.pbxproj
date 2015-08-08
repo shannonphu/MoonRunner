@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FB71FB3B1B751DA60098650D /* MathController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB71FB3A1B751DA60098650D /* MathController.m */; };
 		FB71FB3E1B7555A00098650D /* Run.m in Sources */ = {isa = PBXBuildFile; fileRef = FB71FB3D1B7555A00098650D /* Run.m */; };
+		FB71FB411B75C4880098650D /* MultiColorPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = FB71FB401B75C4880098650D /* MultiColorPolyline.m */; };
 		FBEE6AFD1B6BFDC90030A2A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FBEE6AFC1B6BFDC90030A2A3 /* main.m */; };
 		FBEE6B001B6BFDC90030A2A3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FBEE6AFF1B6BFDC90030A2A3 /* AppDelegate.m */; };
 		FBEE6B031B6BFDC90030A2A3 /* MoonRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FBEE6B011B6BFDC90030A2A3 /* MoonRunner.xcdatamodeld */; };
@@ -81,6 +82,8 @@
 		FB71FB3A1B751DA60098650D /* MathController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MathController.m; sourceTree = "<group>"; };
 		FB71FB3C1B7555A00098650D /* Run.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Run.h; sourceTree = "<group>"; };
 		FB71FB3D1B7555A00098650D /* Run.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Run.m; sourceTree = "<group>"; };
+		FB71FB3F1B75C4880098650D /* MultiColorPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiColorPolyline.h; sourceTree = "<group>"; };
+		FB71FB401B75C4880098650D /* MultiColorPolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiColorPolyline.m; sourceTree = "<group>"; };
 		FBEE6AF71B6BFDC90030A2A3 /* MoonRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoonRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBEE6AFB1B6BFDC90030A2A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FBEE6AFC1B6BFDC90030A2A3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -176,6 +179,8 @@
 				FB71FB3D1B7555A00098650D /* Run.m */,
 				FB71FB391B751DA60098650D /* MathController.h */,
 				FB71FB3A1B751DA60098650D /* MathController.m */,
+				FB71FB3F1B75C4880098650D /* MultiColorPolyline.h */,
+				FB71FB401B75C4880098650D /* MultiColorPolyline.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -447,6 +452,7 @@
 				FB71FB3E1B7555A00098650D /* Run.m in Sources */,
 				FBEE6B2B1B6BFF0E0030A2A3 /* Location.m in Sources */,
 				FBEE6B001B6BFDC90030A2A3 /* AppDelegate.m in Sources */,
+				FB71FB411B75C4880098650D /* MultiColorPolyline.m in Sources */,
 				FB71FB3B1B751DA60098650D /* MathController.m in Sources */,
 				FBEE6B891B6C0BC10030A2A3 /* NewRunViewController.m in Sources */,
 				FBEE6B8C1B6C0C670030A2A3 /* MapDetailViewController.m in Sources */,
