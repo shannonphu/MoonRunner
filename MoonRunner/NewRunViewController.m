@@ -11,10 +11,11 @@
 #import "Location.h"
 #import "NewRunViewController.h"
 #import "Run.h"
+#import <MapKit/MapKit.h>
 
 static NSString * const detailSegueName = @"RunDetails";
 
-@interface NewRunViewController () <UIActionSheetDelegate, CLLocationManagerDelegate>
+@interface NewRunViewController () <UIActionSheetDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (nonatomic, strong) Run *run;
 @property (nonatomic, weak) IBOutlet UILabel *promptLabel;
@@ -23,6 +24,7 @@ static NSString * const detailSegueName = @"RunDetails";
 @property (nonatomic, weak) IBOutlet UILabel *paceLabel;
 @property (nonatomic, weak) IBOutlet UIButton *startButton;
 @property (nonatomic, weak) IBOutlet UIButton *stopButton;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @property int seconds;
 @property float distance;
@@ -39,11 +41,13 @@ static NSString * const detailSegueName = @"RunDetails";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.mapView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     self.startButton.hidden = NO;
     self.promptLabel.hidden = NO;
     
@@ -52,6 +56,7 @@ static NSString * const detailSegueName = @"RunDetails";
     self.distLabel.hidden = YES;
     self.paceLabel.hidden = YES;
     self.stopButton.hidden = YES;
+    self.mapView.hidden = YES;
 }
 
 // pause timer when not in view
@@ -73,6 +78,7 @@ static NSString * const detailSegueName = @"RunDetails";
     self.distLabel.hidden = NO;
     self.paceLabel.hidden = NO;
     self.stopButton.hidden = NO;
+    self.mapView.hidden = NO;
     
     // setup location tracker + labels
     self.seconds = 0;
@@ -106,6 +112,8 @@ static NSString * const detailSegueName = @"RunDetails";
     }
 }
 
+#pragma mark - Map / Run
+
 - (void)saveRun {
     Run *newRun = [NSEntityDescription insertNewObjectForEntityForName:@"Run" inManagedObjectContext:self.managedObjectContext];
     newRun.distance = [NSNumber numberWithFloat:self.distance];
@@ -129,6 +137,17 @@ static NSString * const detailSegueName = @"RunDetails";
         NSLog(@"error in saving. error msg: %@", [error userInfo]);
         abort();
     }
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    if ([overlay isKindOfClass:[MKPolyline class]]) {
+        MKPolyline *polyline = (MKPolyline *)overlay;
+        MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
+        renderer.strokeColor = [UIColor blueColor];
+        renderer.lineWidth = 5;
+        return renderer;
+    }
+    return nil;
 }
 
 #pragma mark - Timer
@@ -161,8 +180,21 @@ static NSString * const detailSegueName = @"RunDetails";
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     for (CLLocation *location in locations) {
-        if (location.horizontalAccuracy < 20 && [self.locations count] > 0) {
+        NSDate *date = location.timestamp;
+        NSTimeInterval howRecent = [date timeIntervalSinceNow];
+        
+        if (fabs(howRecent) < 10.0 && location.horizontalAccuracy < 20 && [self.locations count] > 0) {
             self.distance += [location distanceFromLocation:[self.locations lastObject]];
+            
+            CLLocationCoordinate2D coord[2];
+            CLLocation *loc = [self.locations lastObject];
+            coord[0] = loc.coordinate;
+            coord[1] = location.coordinate;
+            
+            // center map region on most recent locaiton point made and update line
+            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500);
+            [self.mapView setRegion:region];
+            [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coord count:2]];
         }
         [self.locations addObject:location];
     }
