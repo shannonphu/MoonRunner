@@ -8,6 +8,11 @@
 
 #import "BadgeController.h"
 #import "Badge.h"
+#import "Run.h"
+#import "BadgeEarnedStatus.h"
+
+float const silverMultiplier = 1.05; // 5% speed increase
+float const goldMultiplier = 1.10; // 10% speed increase
 
 @interface BadgeController ()
 @property (strong, nonatomic) NSArray *badges;
@@ -48,6 +53,49 @@
     badge.imageName = [dict objectForKey:@"imageName"];
     badge.distance = [[dict objectForKey:@"distance"] floatValue];
     return badge;
+}
+
+
+// compare all runs to badge requirements and replaces all badges
+// best/silver/gold with new run if it meets requirements
+- (NSArray *)earnStatusesForRuns:(NSArray *)runArray {
+    NSMutableArray *statuses = [NSMutableArray array];
+    for (Badge *badge in self.badges) {
+        BadgeEarnedStatus *status = [BadgeEarnedStatus new];
+        status.badge = badge;
+        for (Run *run in runArray) {
+            if (run.distance.floatValue > badge.distance) {
+                if (!status.earnRun) {
+                    status.earnRun = run;
+                }
+                double earnRunSpeed = status.earnRun.distance.doubleValue / status.earnRun.duration.doubleValue;
+                double runSpeed = run.distance.doubleValue / run.duration.doubleValue;
+                
+                // deserves silver badge?
+                if (!status.silverRun && runSpeed > earnRunSpeed * silverMultiplier) {
+                    status.silverRun = run;
+                }
+                
+                // deserves gold badge?
+                if (!status.goldRun && runSpeed > earnRunSpeed * goldMultiplier) {
+                    status.goldRun = run;
+                }
+                
+                // best for this distance?
+                if (!status.bestRun) {
+                    status.bestRun = run;
+                } else {
+                    double oldBestSpeed = status.bestRun.distance.doubleValue / status.bestRun.duration.doubleValue;
+                    // if new run is better than old best speed
+                    if (runSpeed > oldBestSpeed) {
+                        status.bestRun = run;
+                    }
+                }
+            }
+        }
+        [statuses addObject:status];
+    }
+    return statuses;
 }
 
 @end
