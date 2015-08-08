@@ -13,6 +13,8 @@
 		FB71FB441B75D5280098650D /* Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = FB71FB431B75D5280098650D /* Badge.m */; };
 		FB71FB471B75D5610098650D /* BadgeController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB71FB461B75D5610098650D /* BadgeController.m */; };
 		FB71FB4A1B75DC910098650D /* BadgeEarnedStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = FB71FB491B75DC910098650D /* BadgeEarnedStatus.m */; };
+		FBECE3B91B76BDAE0045C2CD /* BadgeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBECE3B81B76BDAE0045C2CD /* BadgeTableViewCell.m */; };
+		FBECE3BC1B76BE0C0045C2CD /* BadgeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBECE3BB1B76BE0C0045C2CD /* BadgeTableViewController.m */; };
 		FBEE6AFD1B6BFDC90030A2A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FBEE6AFC1B6BFDC90030A2A3 /* main.m */; };
 		FBEE6B001B6BFDC90030A2A3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FBEE6AFF1B6BFDC90030A2A3 /* AppDelegate.m */; };
 		FBEE6B031B6BFDC90030A2A3 /* MoonRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FBEE6B011B6BFDC90030A2A3 /* MoonRunner.xcdatamodeld */; };
@@ -93,6 +95,10 @@
 		FB71FB461B75D5610098650D /* BadgeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeController.m; sourceTree = "<group>"; };
 		FB71FB481B75DC910098650D /* BadgeEarnedStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeEarnedStatus.h; sourceTree = "<group>"; };
 		FB71FB491B75DC910098650D /* BadgeEarnedStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeEarnedStatus.m; sourceTree = "<group>"; };
+		FBECE3B71B76BDAE0045C2CD /* BadgeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeTableViewCell.h; sourceTree = "<group>"; };
+		FBECE3B81B76BDAE0045C2CD /* BadgeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeTableViewCell.m; sourceTree = "<group>"; };
+		FBECE3BA1B76BE0C0045C2CD /* BadgeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeTableViewController.h; sourceTree = "<group>"; };
+		FBECE3BB1B76BE0C0045C2CD /* BadgeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeTableViewController.m; sourceTree = "<group>"; };
 		FBEE6AF71B6BFDC90030A2A3 /* MoonRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoonRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBEE6AFB1B6BFDC90030A2A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FBEE6AFC1B6BFDC90030A2A3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -196,6 +202,8 @@
 				FB71FB461B75D5610098650D /* BadgeController.m */,
 				FB71FB481B75DC910098650D /* BadgeEarnedStatus.h */,
 				FB71FB491B75DC910098650D /* BadgeEarnedStatus.m */,
+				FBECE3B71B76BDAE0045C2CD /* BadgeTableViewCell.h */,
+				FBECE3B81B76BDAE0045C2CD /* BadgeTableViewCell.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -209,6 +217,8 @@
 				FBEE6B881B6C0BC10030A2A3 /* NewRunViewController.m */,
 				FBEE6B8A1B6C0C670030A2A3 /* MapDetailViewController.h */,
 				FBEE6B8B1B6C0C670030A2A3 /* MapDetailViewController.m */,
+				FBECE3BA1B76BE0C0045C2CD /* BadgeTableViewController.h */,
+				FBECE3BB1B76BE0C0045C2CD /* BadgeTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -467,12 +477,14 @@
 				FB71FB3E1B7555A00098650D /* Run.m in Sources */,
 				FBEE6B2B1B6BFF0E0030A2A3 /* Location.m in Sources */,
 				FBEE6B001B6BFDC90030A2A3 /* AppDelegate.m in Sources */,
+				FBECE3B91B76BDAE0045C2CD /* BadgeTableViewCell.m in Sources */,
 				FB71FB411B75C4880098650D /* MultiColorPolyline.m in Sources */,
 				FB71FB3B1B751DA60098650D /* MathController.m in Sources */,
 				FB71FB441B75D5280098650D /* Badge.m in Sources */,
 				FB71FB4A1B75DC910098650D /* BadgeEarnedStatus.m in Sources */,
 				FBEE6B891B6C0BC10030A2A3 /* NewRunViewController.m in Sources */,
 				FB71FB471B75D5610098650D /* BadgeController.m in Sources */,
+				FBECE3BC1B76BE0C0045C2CD /* BadgeTableViewController.m in Sources */,
 				FBEE6B8C1B6C0C670030A2A3 /* MapDetailViewController.m in Sources */,
 				FBEE6B031B6BFDC90030A2A3 /* MoonRunner.xcdatamodeld in Sources */,
 				FBEE6AFD1B6BFDC90030A2A3 /* main.m in Sources */,

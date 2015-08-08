@@ -8,9 +8,11 @@
 
 #import "HomeViewController.h"
 #import "AppDelegate.h"
+#import "BadgeTableViewController.h"
+#import "BadgeController.h"
 
 @interface HomeViewController ()
-
+@property (strong, nonatomic) NSArray *runArray;
 @end
 
 @implementation HomeViewController
@@ -20,6 +22,17 @@
     // Do any additional setup after loading the view.
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     _managedObjectContext = [appDelegate managedObjectContext];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Run" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDesc]];
+    self.runArray = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,6 +50,8 @@
     UIViewController *nextController = [segue destinationViewController];
     if ([nextController isKindOfClass:[NewRunViewController class]]) {
         ((NewRunViewController *) nextController).managedObjectContext = self.managedObjectContext;
+    } else if ([nextController isKindOfClass:[BadgeTableViewController class]]) {
+        ((BadgeTableViewController *) nextController).statusArray = [[BadgeController defaultController] earnStatusesForRuns:self.runArray];
     }
 }
 
