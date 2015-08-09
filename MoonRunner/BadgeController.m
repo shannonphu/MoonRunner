@@ -10,6 +10,10 @@
 #import "Badge.h"
 #import "Run.h"
 #import "BadgeEarnedStatus.h"
+#import <MapKit/MapKit.h>
+#import "Location.h"
+#import "MathController.h"
+#import "BadgeAnnotation.h"
 
 float const silverMultiplier = 1.05; // 5% speed increase
 float const goldMultiplier = 1.10; // 10% speed increase
@@ -116,6 +120,44 @@ float const goldMultiplier = 1.10; // 10% speed increase
         [statuses addObject:status];
     }
     return statuses;
+}
+
+// loop over all location points in run and adds annotation
+// whenever a new distance milestone has been reached to qualify
+// for a badge
+- (NSArray *)annotationsForRun:(Run *)run {
+    NSMutableArray *annotations = [NSMutableArray array];
+    int locationIndex = 1;
+    float distance = 0;
+    
+    for (Badge *badge in self.badges) {
+        if (badge.distance > run.distance.floatValue) {
+            break;
+        }
+        while (locationIndex < run.locations.count) {
+            Location *firstLocation = [run.locations objectAtIndex:(locationIndex - 1)];
+            Location *secondLocation = [run.locations objectAtIndex:locationIndex];
+            
+            CLLocation *firstCLLocation = [[CLLocation alloc]
+                                           initWithLatitude:firstLocation.latitude.floatValue longitude:firstLocation.longitude.floatValue];
+            CLLocation *secondCLLocation = [[CLLocation alloc] initWithLatitude:secondLocation.latitude.floatValue longitude:secondLocation.longitude.floatValue];
+            
+            distance += [secondCLLocation distanceFromLocation:firstCLLocation];
+            locationIndex++;
+            
+            if (distance >= badge.distance) {
+                BadgeAnnotation *annotation = [[BadgeAnnotation alloc] init];
+                annotation.coordinate = secondCLLocation.coordinate;
+                annotation.title = badge.name;
+                annotation.subtitle = [MathController stringForDistance:badge.distance];
+                annotation.imageName = badge.imageName;
+                [annotations addObject:annotation];
+                break;
+            }
+        }
+    }
+    
+    return annotations;
 }
 
 @end

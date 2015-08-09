@@ -14,6 +14,7 @@
 #import "MultiColorPolyline.h"
 #import "Badge.h"
 #import "BadgeController.h"
+#import "BadgeAnnotation.h"
 
 @interface MapDetailViewController () <MKMapViewDelegate>
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
@@ -144,11 +145,30 @@
         [self.mapView setRegion:[self mapRegion]];
         NSArray *colorSegmentArr = [MathController colorSegmentsForLocations:self.run.locations.array];
         [self.mapView addOverlays:colorSegmentArr];
+        [self.mapView addAnnotations:[[BadgeController defaultController] annotationsForRun:self.run]];
     } else {
         self.mapView.hidden = YES;
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, this run has no locations saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    BadgeAnnotation *badgeAnnotation = (BadgeAnnotation *)annotation;
+    MKAnnotationView *annoView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"checkpt"];
+    
+    if (!annoView) {
+        annoView = [[MKAnnotationView alloc] initWithAnnotation:badgeAnnotation reuseIdentifier:@"checkpt"];
+        annoView.image = [UIImage imageNamed:@"mapPin"];
+        annoView.canShowCallout = YES;
+    }
+    
+    UIImageView *badgeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 75, 50)];
+    badgeImageView.image = [UIImage imageNamed:badgeAnnotation.imageName];
+    badgeImageView.contentMode = UIViewContentModeScaleAspectFit;
+    annoView.leftCalloutAccessoryView = badgeImageView;
+    
+    return annoView;
 }
 
 /*

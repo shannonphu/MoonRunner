@@ -16,6 +16,7 @@
 		FBECE3B91B76BDAE0045C2CD /* BadgeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBECE3B81B76BDAE0045C2CD /* BadgeTableViewCell.m */; };
 		FBECE3BC1B76BE0C0045C2CD /* BadgeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBECE3BB1B76BE0C0045C2CD /* BadgeTableViewController.m */; };
 		FBECE3BF1B76C7030045C2CD /* BadgeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBECE3BE1B76C7030045C2CD /* BadgeDetailViewController.m */; };
+		FBECE3C21B76D1380045C2CD /* BadgeAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FBECE3C11B76D1380045C2CD /* BadgeAnnotation.m */; };
 		FBEE6AFD1B6BFDC90030A2A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FBEE6AFC1B6BFDC90030A2A3 /* main.m */; };
 		FBEE6B001B6BFDC90030A2A3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FBEE6AFF1B6BFDC90030A2A3 /* AppDelegate.m */; };
 		FBEE6B031B6BFDC90030A2A3 /* MoonRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FBEE6B011B6BFDC90030A2A3 /* MoonRunner.xcdatamodeld */; };
@@ -102,6 +103,8 @@
 		FBECE3BB1B76BE0C0045C2CD /* BadgeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeTableViewController.m; sourceTree = "<group>"; };
 		FBECE3BD1B76C7030045C2CD /* BadgeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeDetailViewController.h; sourceTree = "<group>"; };
 		FBECE3BE1B76C7030045C2CD /* BadgeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeDetailViewController.m; sourceTree = "<group>"; };
+		FBECE3C01B76D1380045C2CD /* BadgeAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeAnnotation.h; sourceTree = "<group>"; };
+		FBECE3C11B76D1380045C2CD /* BadgeAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeAnnotation.m; sourceTree = "<group>"; };
 		FBEE6AF71B6BFDC90030A2A3 /* MoonRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoonRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBEE6AFB1B6BFDC90030A2A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FBEE6AFC1B6BFDC90030A2A3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -207,6 +210,8 @@
 				FB71FB491B75DC910098650D /* BadgeEarnedStatus.m */,
 				FBECE3B71B76BDAE0045C2CD /* BadgeTableViewCell.h */,
 				FBECE3B81B76BDAE0045C2CD /* BadgeTableViewCell.m */,
+				FBECE3C01B76D1380045C2CD /* BadgeAnnotation.h */,
+				FBECE3C11B76D1380045C2CD /* BadgeAnnotation.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -483,6 +488,7 @@
 				FBEE6B2B1B6BFF0E0030A2A3 /* Location.m in Sources */,
 				FBEE6B001B6BFDC90030A2A3 /* AppDelegate.m in Sources */,
 				FBECE3B91B76BDAE0045C2CD /* BadgeTableViewCell.m in Sources */,
+				FBECE3C21B76D1380045C2CD /* BadgeAnnotation.m in Sources */,
 				FB71FB411B75C4880098650D /* MultiColorPolyline.m in Sources */,
 				FB71FB3B1B751DA60098650D /* MathController.m in Sources */,
 				FB71FB441B75D5280098650D /* Badge.m in Sources */,
