@@ -10,7 +10,7 @@
 #import "MultiColorPolyline.h"
 #import "Location.h"
 
-static bool const isMetric = YES;
+static bool const isMetric = NO;
 static float const metersInKM = 1000;
 static float const metersInMile = 1609.344;
 
