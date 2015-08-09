@@ -65,7 +65,7 @@
         cell.nameLabel.textColor = self.greenColor;
         cell.nameLabel.text = status.badge.name;
         
-        cell.descLabel.textColor = self.redColor;
+        cell.descLabel.textColor = self.greenColor;
         cell.descLabel.text = [NSString stringWithFormat:@"Earned: %@", [self.dateFormatter stringFromDate:status.earnRun.timestamp]];
         
         cell.imageView.image = [UIImage imageNamed:status.badge.imageName];

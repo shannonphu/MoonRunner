@@ -54,6 +54,27 @@ float const goldMultiplier = 1.10; // 10% speed increase
     return badge;
 }
 
+- (Badge *)bestBadgeForDistance:(float)distance {
+    Badge *best = self.badges.firstObject;
+    for (Badge *badge in self.badges) {
+        if (distance < badge.distance) {
+            break;
+        }
+        best = badge;
+    }
+    return best;
+}
+
+- (Badge *)nextBadgeForDistance:(float)distance {
+    Badge *nextBadge;
+    for (Badge *badge in self.badges) {
+        nextBadge = badge;
+        if (distance < badge.distance) {
+            break;
+        }
+    }
+    return nextBadge;
+}
 
 // compare all runs to badge requirements and replaces all badges
 // best/silver/gold with new run if it meets requirements

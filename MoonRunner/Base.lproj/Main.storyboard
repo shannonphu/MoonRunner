@@ -354,13 +354,43 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="aIO-jS-AUe">
+                                <rect key="frame" x="255" y="517" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="displayModeToggled:" destination="Ah7-4n-0Wa" eventType="valueChanged" id="qw7-qS-ems"/>
+                                </connections>
+                            </switch>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="E6s-uK-cNT">
+                                <rect key="frame" x="0.0" y="63" width="320" height="352"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0fP-F1-rZt">
+                                <rect key="frame" x="267" y="360" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="info.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="infoButtonPressed" destination="Ah7-4n-0Wa" eventType="touchUpInside" id="4cH-rC-ZUJ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SPACE MODE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RWc-dC-3S0">
+                                <rect key="frame" x="251" y="479" width="56" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Last Run" id="cra-N8-TIN"/>
                     <connections>
+                        <outlet property="badgeImageView" destination="E6s-uK-cNT" id="Xe4-nD-EN8"/>
                         <outlet property="dateLabel" destination="sz8-Nl-gwm" id="57L-HK-jRb"/>
                         <outlet property="distanceLabel" destination="Yvu-mw-hDf" id="ddH-af-stP"/>
+                        <outlet property="infoButton" destination="0fP-F1-rZt" id="pXF-hJ-Nai"/>
                         <outlet property="mapView" destination="BTs-XY-LAl" id="73i-GV-A1Y"/>
                         <outlet property="paceLabel" destination="nsR-sh-bA9" id="6cw-HL-0tx"/>
                         <outlet property="timeLabel" destination="RYx-6a-NL9" id="flU-Qu-nwm"/>

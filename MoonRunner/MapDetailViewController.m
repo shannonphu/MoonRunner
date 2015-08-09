@@ -12,6 +12,8 @@
 #import "Run.h"
 #import "Location.h"
 #import "MultiColorPolyline.h"
+#import "Badge.h"
+#import "BadgeController.h"
 
 @interface MapDetailViewController () <MKMapViewDelegate>
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
@@ -19,6 +21,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property (nonatomic, weak) IBOutlet UILabel *paceLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *badgeImageView;
+@property (nonatomic, weak) IBOutlet UIButton *infoButton;
 @end
 
 @implementation MapDetailViewController
@@ -52,6 +56,29 @@
     self.timeLabel.text = [NSString stringWithFormat:@"Time: %@", [MathController stringForSeconds:self.run.duration.intValue usingLongFormat:YES]];
     self.paceLabel.text = [NSString stringWithFormat:@"Pace: %@", [MathController stringForAvgPaceFromDist:self.run.distance.floatValue overTime:self.run.duration.intValue]];
     [self loadMap];
+    
+    Badge *badge = [[BadgeController defaultController] bestBadgeForDistance:self.run.distance.floatValue];
+    self.badgeImageView.image = [UIImage imageNamed:badge.imageName];
+}
+
+- (IBAction)displayModeToggled:(UISwitch *)sender
+{
+    self.badgeImageView.hidden = !sender.isOn;
+    self.infoButton.hidden = !sender.isOn;
+    self.mapView.hidden = sender.isOn;
+}
+
+- (IBAction)infoButtonPressed
+{
+    Badge *badge = [[BadgeController defaultController] bestBadgeForDistance:self.run.distance.floatValue];
+    
+    UIAlertView *alertView = [[UIAlertView alloc]
+                              initWithTitle:badge.name
+                              message:badge.info
+                              delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+    [alertView show];
 }
 
 - (MKCoordinateRegion)mapRegion {

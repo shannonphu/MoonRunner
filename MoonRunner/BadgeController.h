@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class Badge;
 
 extern float const silverMultiplier;
 extern float const goldMultiplier;
@@ -14,4 +15,6 @@ extern float const goldMultiplier;
 @interface BadgeController : NSObject
 + (BadgeController *)defaultController;
 - (NSArray *)earnStatusesForRuns:(NSArray *)runArray;
+- (Badge *)bestBadgeForDistance:(float)distance;
+- (Badge *)nextBadgeForDistance:(float)distance;
 @end
